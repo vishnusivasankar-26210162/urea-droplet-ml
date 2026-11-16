@@ -1,0 +1,68 @@
+PHASE 2 INTEGRITY REPORT
+========================================================================
+Metadata file: data/processed/metadata.csv
+Rows: 1064
+Unique image IDs: 1064
+Unique image paths: 1064
+
+Rows by cohort:
+  new_tubes: 456
+  nov4_validation: 32
+  original: 576
+
+Unique tubes: 51
+Unique tubes by instance: {1: 24, 2: 19, 3: 8}
+
+Rows by source workbook:
+  data/raw/Dinolite/4thnov_validation.xlsx: 32 metadata rows; workbook exists=True
+  data/raw/Dinolite/dinolite_withlight.xlsx: 143 metadata rows; workbook exists=True
+  data/raw/Dinolite/dinolite_withoutlight.xlsx: 140 metadata rows; workbook exists=True
+  data/raw/SamsungA31/A31_withlight.xlsx: 147 metadata rows; workbook exists=True
+  data/raw/SamsungA31/A31_withoutlight.xlsx: 146 metadata rows; workbook exists=True
+  data/raw/new_data/A31_proc_img.xlsx: 228 metadata rows; workbook exists=True
+  data/raw/new_data/dino_proc_img.xlsx: 228 metadata rows; workbook exists=True
+
+Rows by cohort/device/lamp:
+  ('original', 'dino', 'off'): 140 (expected 140)
+  ('original', 'dino', 'on'): 143 (expected 143)
+  ('original', 'phone', 'off'): 146 (expected 146)
+  ('original', 'phone', 'on'): 147 (expected 147)
+  ('new_tubes', 'dino', 'off'): 114 (expected 114)
+  ('new_tubes', 'dino', 'on'): 114 (expected 114)
+  ('new_tubes', 'phone', 'off'): 114 (expected 114)
+  ('new_tubes', 'phone', 'on'): 114 (expected 114)
+  ('nov4_validation', 'dino', 'off'): 16 (expected 16)
+  ('nov4_validation', 'dino', 'on'): 16 (expected 16)
+
+Per-concentration counts differing from the usual condition count:
+  original, 0.20%, dino, off: 4 images (usual count 6)
+  original, 0.20%, phone, off: 8 images (usual count 6)
+  original, 0.20%, phone, on: 9 images (usual count 6)
+  original, 0.40%, dino, off: 4 images (usual count 6)
+  original, 0.45%, dino, on: 5 images (usual count 6)
+
+Images with timestamps: 1017
+Images without timestamps: 47
+Missing timestamps by cohort/device/lamp:
+  ('original', 'phone', 'off'): 47
+
+Repeated Dino-Lite sequence numbers (inspect; IDs/paths remain unique):
+  dino_off_056_20240911_180956 | 0.4% | off | A056 | 2024-09-11 18:09:56 | data/raw/Dinolite/without_light/A056 - 20240911_180956.bmp
+  dino_off_056_20240911_181520 | 0.4% | off | A056 | 2024-09-11 18:15:20 | data/raw/Dinolite/without_light/A056 - 20240911_181520.bmp
+
+Original images missing/outside project root: 0
+Original images unreadable: 0
+
+Blank droplet_id rows: 1064
+Blank view_id rows: 1064
+These identifiers are intentionally unpopulated; evaluation groups by tube_id.
+
+WARNINGS / ITEMS TO DOCUMENT
+- Irregular per-concentration image counts are not silently corrected.
+- Repeated A056 sequence numbers refer to distinct paths/timestamps; verify/document from lab records if possible.
+- Missing timestamps remain missing; do not infer them from neighboring photos.
+
+ERRORS
+None
+
+STATUS: PASS — structural integrity checks passed

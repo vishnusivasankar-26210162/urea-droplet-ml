@@ -82,6 +82,14 @@ SOURCES = [
     },
 ]
 
+# User-confirmed preparation batches. Each (instance, concentration) is one
+# physical tube; all photos from that tube share the same tube_id.
+INSTANCE_BY_COHORT = {
+    "original": 1,
+    "new_tubes": 2,
+    "nov4_validation": 3,
+}
+
 DINO_PATTERN = re.compile(
     r"A(?P<seq>\d+)[ _-]+(?P<date>\d{8})_(?P<time>\d{6})",
     re.IGNORECASE,
@@ -257,6 +265,7 @@ def map_excel_to_originals(source):
     rows = []
     mapping_rows = []
     used_paths = []
+    instance_id = INSTANCE_BY_COHORT[source["cohort"]]
 
     for idx, record in df.iterrows():
         original_path = str(record["orig_path"]).strip()
@@ -313,7 +322,8 @@ def map_excel_to_originals(source):
                 if pd.notna(timestamp) else None
             ),
             "seq": seq,
-            "tube_id": None,
+            "instance_id": instance_id,
+            "tube_id": f"I{instance_id}_C{float(record['conc']):.2f}",
             "droplet_id": None,
             "view_id": None,
             "cohort": source["cohort"],
@@ -402,6 +412,34 @@ def main():
                 f"Duplicate {column} values detected: {duplicates[:10]}"
             )
 
+    # Verify that the instance/tube hierarchy agrees with the experimental
+    # design: one physical tube per concentration in each preparation instance.
+    expected_instance = meta["cohort"].map(INSTANCE_BY_COHORT)
+    if expected_instance.isna().any() or not (
+        expected_instance.astype(int).to_numpy() == meta["instance_id"].to_numpy()
+    ).all():
+        raise ValueError("Cohort-to-instance assignment is inconsistent")
+
+    tube_check = meta.groupby("tube_id").agg(
+        n_instances=("instance_id", "nunique"),
+        n_concentrations=("conc", "nunique"),
+    )
+    if (tube_check["n_instances"] != 1).any():
+        raise ValueError("A tube_id is associated with multiple instances")
+    if (tube_check["n_concentrations"] != 1).any():
+        raise ValueError("A tube_id is associated with multiple concentrations")
+
+    expected_tubes_by_instance = {1: 24, 2: 19, 3: 8}
+    observed_tubes_by_instance = (
+        meta.groupby("instance_id")["tube_id"].nunique().to_dict()
+    )
+    if observed_tubes_by_instance != expected_tubes_by_instance:
+        raise ValueError(
+            "Unexpected tube counts by instance: "
+            f"{observed_tubes_by_instance}; expected "
+            f"{expected_tubes_by_instance}"
+        )
+
     print("\nRows by cohort:")
     print(meta.groupby("cohort").size().to_string())
 
@@ -489,7 +527,8 @@ def main():
     print("Excel mapping report saved:", rel(MAPPING_REPORT))
     print("Total metadata rows:", len(meta))
     print("Unique image IDs:", meta["image_id"].nunique())
-    print("\nTube, droplet and view IDs are intentionally blank.")
+    print("\nInstance and tube IDs were assigned from the confirmed hierarchy.")
+    print("Droplet and view IDs are intentionally blank by project decision.")
     print("Do not assign dev/test roles until Phase 3.")
 
 
