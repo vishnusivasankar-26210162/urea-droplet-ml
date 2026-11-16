@@ -1,0 +1,8 @@
+excel_path,rows,columns,expected_two_columns,error
+data/raw/Dinolite/4thnov_validation.xlsx,32,2,True,
+data/raw/Dinolite/dinolite_withlight.xlsx,143,2,True,
+data/raw/Dinolite/dinolite_withoutlight.xlsx,140,2,True,
+data/raw/SamsungA31/A31_withlight.xlsx,147,2,True,
+data/raw/SamsungA31/A31_withoutlight.xlsx,146,2,True,
+data/raw/new_data/A31_proc_img.xlsx,228,2,True,
+data/raw/new_data/dino_proc_img.xlsx,228,2,True,
