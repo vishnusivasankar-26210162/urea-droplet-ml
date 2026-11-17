@@ -1,0 +1,28 @@
+{
+  "selection_rule": "one_standard_error_across_E2",
+  "selected_configuration": "SVR__S1_with_device_and_lamp",
+  "model": "SVR",
+  "feature_set": "S1",
+  "variant": "with_device_and_lamp",
+  "feature_columns": [
+    "L_mean",
+    "a_mean",
+    "b_mean",
+    "device_dino",
+    "device_phone",
+    "lamp_off",
+    "lamp_on"
+  ],
+  "n_features": 7,
+  "best_raw_configuration": "SVR__S1_with_device_and_lamp",
+  "best_raw_oof_mae": 0.19150351959857506,
+  "best_raw_bootstrap_se": 0.019928689141282548,
+  "one_se_cutoff": 0.2114322087398576,
+  "n_bootstrap": 2000,
+  "seed": 0,
+  "resampling_unit": "tube_id",
+  "n_tubes": 31,
+  "n_images": 666,
+  "validation_used": false,
+  "test_used": false
+}

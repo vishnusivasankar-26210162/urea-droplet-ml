@@ -1,0 +1,5 @@
+model,feature_set,best_inner_cv_mae,best_params
+SVR_S1_device_lamp,S1_with_device_and_lamp,0.17888582190115404,"{""model__C"": 10, ""model__epsilon"": 0.02, ""model__gamma"": 0.1}"
+Random_Forest_S2,S2_colour_only,0.21241117897234724,"{""model__min_samples_leaf"": 2}"
+Gradient_Boosting_S2,S2_colour_only,0.21325638303463984,"{""model__learning_rate"": 0.03, ""model__max_depth"": 3, ""model__n_estimators"": 300}"
+SVR_S2,S2_colour_only,0.21123809268824184,"{""model__C"": 10, ""model__epsilon"": 0.02, ""model__gamma"": 0.1}"

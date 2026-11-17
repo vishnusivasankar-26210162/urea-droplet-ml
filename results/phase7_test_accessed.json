@@ -1,0 +1,27 @@
+{
+  "phase": "7",
+  "test_partition_accessed": true,
+  "timestamp_utc": "2026-11-17T15:44:08.184671+00:00",
+  "test_images": 200,
+  "test_tubes": 10,
+  "development_images_for_baselines": 864,
+  "selected_model": "SVR_S1_device_lamp",
+  "model_sha256": "5afb9b97a4bd73eb7fa569ffc2483ddc37646d86fb162277bc669ec4cf22adaa",
+  "dataset_sha256": "d88d8b2208e7d914b655b2f3a5cda4611d329590b21a1018bc6a706d634aaad8",
+  "erosion_fraction": 0.035,
+  "glare_value_threshold": 0.92,
+  "glare_saturation_threshold": 0.25,
+  "bootstrap_replicates": 2000,
+  "bootstrap_seed": 0,
+  "completed": true,
+  "feature_status_counts": {
+    "ok": 200
+  },
+  "output_files": [
+    "results/test_predictions.csv",
+    "results/test_processing_manifest.csv",
+    "results/test_results.csv",
+    "results/test_tube_bootstrap_samples.csv",
+    "reports/phase7_final_test.md"
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "feature_set": "S1_with_device_and_lamp",
+  "features": [
+    "L_mean",
+    "a_mean",
+    "b_mean",
+    "device_dino",
+    "device_phone",
+    "lamp_off",
+    "lamp_on"
+  ],
+  "fit_data": {
+    "images": 864,
+    "test_partition_accessed": false,
+    "training_images": 666,
+    "tubes": 41,
+    "validation_images": 198
+  },
+  "model_name": "SVR_S1_device_lamp",
+  "phase": "6.7",
+  "pipeline": [
+    {
+      "keep_empty_features": true,
+      "method": "SimpleImputer",
+      "step": "imputer",
+      "strategy": "median"
+    },
+    {
+      "method": "StandardScaler",
+      "step": "scaler"
+    },
+    {
+      "C": 10,
+      "epsilon": 0.02,
+      "gamma": 0.1,
+      "kernel": "rbf",
+      "method": "SVR",
+      "step": "model"
+    }
+  ],
+  "project": "urea-droplet-ml",
+  "provenance": {
+    "dataset_path": "data/processed/dataset.csv",
+    "dataset_sha256": "d88d8b2208e7d914b655b2f3a5cda4611d329590b21a1018bc6a706d634aaad8",
+    "fit_timestamp_utc": "2026-11-17T15:26:06.047129+00:00",
+    "model_path": "models/final_svr_s1_device_lamp.joblib",
+    "model_sha256": "5afb9b97a4bd73eb7fa569ffc2483ddc37646d86fb162277bc669ec4cf22adaa"
+  },
+  "reproducibility": {
+    "fit_metrics_reported": false,
+    "hyperparameters_frozen": true,
+    "test_partition_loaded": false,
+    "test_predictions_generated": false,
+    "validation_used_for_hyperparameter_tuning": false
+  },
+  "selection_evidence": {
+    "selected_model": "SVR_S1_device_lamp",
+    "validation_bias": 0.1081498373147942,
+    "validation_mae": 0.19801539763881718,
+    "validation_r2": 0.8019606651848571,
+    "validation_rmse": 0.24057061815945208,
+    "validation_within_plus_minus_0_1": 0.26262626262626265
+  },
+  "software_versions": {
+    "joblib": "1.6.0",
+    "numpy": "2.5.4",
+    "pandas": "3.1.0",
+    "python": "3.14.4",
+    "scikit_learn": "1.9.1"
+  },
+  "target": {
+    "column": "conc",
+    "description": "Added urea concentration",
+    "unit": "% w/v"
+  },
+  "task": "Regression: estimate added urea concentration"
+}\n

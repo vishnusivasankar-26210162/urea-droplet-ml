@@ -1,0 +1,23 @@
+{
+  "selection_rule": "one_standard_error",
+  "bootstrap_repetitions": 2000,
+  "bootstrap_seed": 0,
+  "resampling_unit": "tube_id",
+  "best_by_oof_mae": "Random_Forest_S2",
+  "best_oof_mae": 0.2103304549110106,
+  "best_bootstrap_se": 0.019909450028025917,
+  "one_se_cutoff": 0.2302399049390365,
+  "selected_simplest_eligible_model": "SVR_RBF_S2",
+  "simplicity_order": [
+    "B0",
+    "B1",
+    "Polynomial_Ridge_b_med",
+    "Ridge_S2_scratch",
+    "SVR_RBF_S2",
+    "Random_Forest_S2",
+    "Gradient_Boosting_S2",
+    "MLP_S2"
+  ],
+  "validation_used": false,
+  "test_used": false
+}
